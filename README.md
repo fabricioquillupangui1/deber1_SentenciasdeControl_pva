@@ -1,5 +1,3 @@
-Perfecto 👍
-A continuación te dejo **la información completa, ordenada y redactada en formato README**, lista para copiar y pegar en tu proyecto. Está estructurada, clara y pensada para **documentar conceptos de Kotlin + Jetpack Compose** de forma académica y práctica.
 
 ---
 
@@ -302,11 +300,6 @@ Este repositorio demuestra cómo las **sentencias de control en Kotlin** no solo
 
 ---
 
-Si quieres, puedo:
-
-* Adaptarlo a **nivel universitario**
-* Simplificar el README
-* Convertir esto en **guía PDF**
-* O ajustarlo a un **proyecto específico**
-
-Solo dime 👍
+<h1>Ejercicios prácticos y Readme (Dar click en los enlaces)</h1>
+<a href="https://drive.google.com/file/d/15FVqpBPP9jeUe7Jluji94yOcqyPRi9ci/view?usp=sharing">Video de los 2 ejercicios prácticos</a><br>
+<a href="">Enlace de github a Readme</a>
