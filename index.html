@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sentencias de Control en Kotlin y Android</title>
+
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 30px;
+            line-height: 1.6;
+            background: #f4f7f6; /* Fondo suave */
+            color: #333;
+        }
+
+        h1 {
+            color: #1a5276;
+            border-bottom: 3px solid #1a5276;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+            font-size: 2.2em;
+        }
+
+        h2, h3 {
+            color: #1a5276;
+            font-weight: 600;
+        }
+
+        p, li {
+            color: #34495e;
+            font-size: 15px;
+        }
+        
+        /* Estilo para los códigos inline dentro de listas */
+        ul li code {
+            background: none !important; 
+            color: #34495e; 
+            padding: 0;
+            font-weight: bold;
+            font-family: 'Consolas', 'Monaco', monospace;
+        }
+
+        .card {
+            background: #ffffff;
+            padding: 20px;
+            margin-bottom: 25px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        
+        .card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* ================== BLOQUES DE CÓDIGO (Visor Oscuro) ================== */
+        pre {
+            background: #1e1e1e; /* Fondo oscuro (VS Code Dark) */
+            padding: 18px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+            font-family: 'Consolas', 'Monaco', monospace; 
+            color: #d4d4d4; /* Color de texto por defecto en el bloque pre */
+            margin-top: 15px;
+        }
+        
+        /* Aseguramos que el código dentro de PRE herede el estilo y la fuente */
+        pre code {
+            font-family: 'Consolas', 'Monaco', monospace;
+            background: none; 
+            padding: 0;
+            color: #d4d4d4; /* Color de texto base */
+        }
+
+        /* ================== COLORES DE SINTAXIS ================== */
+        .kw { color: #569cd6; }      /* palabras clave (if, for, val, fun, try) */
+        .fn { color: #dcdcaa; }      /* funciones (println, clasificar, delay) */
+        .var { color: #9cdcfe; }     /* variables / identificadores (edad, contador) */
+        .num { color: #b5cea8; }     /* números (18, 0, 5) */
+        .str { color: #ce9178; }     /* cadenas ("Adulto", "Error: $...") */
+        .op  { color: #c586c0; }     /* operadores (>=, +, ->, ?: ) */
+        .com { color: #6a9955; }     /* comentarios */
+        .type{ color: #4ec9b0; }     /* tipos (Int, String, Exception, GlobalScope) */
+    </style>
+
+</head>
+<body>
+
+    <h1>📘 Sentencias de Control en Kotlin y Android</h1>
+    
+    <div class="card">
+        <h2>✨ ¿Qué son las Sentencias de Control?</h2>
+        <p>Las sentencias de control son la columna vertebral de cualquier lenguaje de programación. Son estructuras que permiten modificar el flujo normal de ejecución de un programa, que generalmente es secuencial (línea por línea).</p>
+        <p>En Kotlin y en el desarrollo de Android, estas sentencias son esenciales para:</p>
+        <ul>
+            <li>Decidir: Ejecutar un bloque de código u otro basándose en una condición (ej: `if`/`when`).</li>
+            <li>Repetir: Ejecutar un bloque de código múltiples veces (ej: `for`/`while`).</li>
+            <li>Manejar Errores: Controlar y responder a situaciones inesperadas (ej: `try`/`catch`).</li>
+        </ul>
+        
+
+    </div>
+
+    <h2 style="margin-top: 40px; border-bottom: 2px dashed #ccc; padding-bottom: 5px;">🛠️ Detalle de Sintaxis y Uso</h2>
+    
+    <div class="card">
+        <h2>1. IF / ELSE (Toma de Decisiones)</h2>
+        <p>Ejecuta bloques de código dependiendo de una condición booleana. En Kotlin, `if` también es una expresión que puede devolver un valor.</p>
+        <pre><span class="kw">if</span> (<span class="var">edad</span> <span class="op">>=</span> <span class="num">18</span>) {
+    <span class="fn">println</span>(<span class="str">"Mayor de edad"</span>)
+} <span class="kw">else</span> <span class="kw">if</span> (<span class="var">edad</span> <span class="op">></span> <span class="num">0</span>) {
+    <span class="fn">println</span>(<span class="str">"Menor de edad"</span>)
+} <span class="kw">else</span> {
+    <span class="fn">println</span>(<span class="str">"Edad inválida"</span>)
+}</pre>
+    </div>
+
+    <div class="card">
+        <h2>2. WHEN (Alternativa a Switch/Múltiples Casos)</h2>
+        <p>Reemplaza la estructura `switch` de Java, permitiendo evaluar una expresión contra múltiples ramas. Puede ser usado como sentencia o como expresión (devolviendo un valor).</p>
+        <pre><span class="kw">when</span>(<span class="var">opcion</span>) {
+    <span class="num">1</span> <span class="op">-></span> <span class="fn">println</span>(<span class="str">"Inicio"</span>)
+    <span class="num">2</span> <span class="op">-></span> <span class="fn">println</span>(<span class="str">"Configuración"</span>)
+    <span class="kw">in</span> <span class="num">3</span><span class="op">..</span><span class="num">5</span> <span class="op">-></span> <span class="fn">println</span>(<span class="str">"Menú Secundario"</span>)
+    <span class="kw">else</span> <span class="op">-></span> <span class="fn">println</span>(<span class="str">"Salir"</span>)
+}</pre>
+    </div>
+
+    <div class="card">
+        <h2>3. BUCLES FOR (Iteración)</h2>
+        <p>Se utiliza para iterar sobre cualquier objeto que proporcione un iterador, como rangos, listas, arrays o colecciones.</p>
+        <pre><span class="kw">val</span> <span class="var">listaNombres</span> <span class="op">=</span> <span class="type">listOf</span>(<span class="str">"Ana"</span>, <span class="str">"Beto"</span>, <span class="str">"Carlos"</span>)
+<span class="kw">for</span> (<span class="var">nombre</span> <span class="kw">in</span> <span class="var">listaNombres</span>) {
+    <span class="fn">println</span>(<span class="str">"Hola $<span class="op">{</span><span class="var">nombre</span><span class="op">}</span>"</span>)
+}</pre>
+    </div>
+
+    <div class="card">
+        <h2>4. WHILE / DO WHILE (Bucles Condicionales)</h2>
+        <p>Ejecutan un bloque de código mientras se cumple una condición booleana (`while`) o ejecutan el bloque al menos una vez antes de verificar la condición (`do-while`).</p>
+        <pre><span class="kw">var</span> <span class="var">contador</span> <span class="op">=</span> <span class="num">0</span>
+<span class="kw">while</span> (<span class="var">contador</span> <span class="op"><</span> <span class="num">3</span>) {
+    <span class="fn">println</span>(<span class="str">"Contando: $<span class="op">{</span><span class="var">contador</span><span class="op">}</span>"</span>)
+    <span class="var">contador</span><span class="op">++</span>
+}
+        </pre>
+    </div>
+
+    <div class="card">
+        <h2>5. TRY / CATCH / FINALLY (Manejo de Excepciones)</h2>
+        <p>Permite manejar errores o excepciones en el código. `try` contiene el código que puede fallar, `catch` maneja el error, y `finally` se ejecuta siempre.</p>
+        <pre><span class="kw">try</span> {
+    <span class="kw">val</span> <span class="var">x</span> <span class="op">=</span> <span class="num">10</span> <span class="op">/</span> <span class="num">0</span>
+} <span class="kw">catch</span> (<span class="var">e</span>: <span class="type">Exception</span>) {
+    <span class="fn">println</span>(<span class="str">"Error: División por cero"</span>)
+} <span class="kw">finally</span> {
+    <span class="fn">println</span>(<span class="str">"Operación finalizada"</span>)
+}
+        </pre>
+    </div>
+
+    <h3 style="margin-top: 40px; border-bottom: 1px solid #eee; padding-bottom: 5px;">Otras Sentencias de Control Esenciales</h3>
+
+    <div class="card">
+        <h2>6. BREAK / CONTINUE (Modificadores de Bucles)</h2>
+        <p>
+            <code class="kw">break</code>: Termina el bucle más cercano inmediatamente.<br>
+            <code class="kw">continue</code>: Salta la iteración actual y continúa con la siguiente del bucle.
+        </p>
+        <pre><span class="kw">for</span> (<span class="var">i</span> <span class="kw">in</span> <span class="num">1</span><span class="op">..</span><span class="num">10</span>) {
+    <span class="kw">if</span> (<span class="var">i</span> <span class="op">%</span> <span class="num">2</span> <span class="op">!=</span> <span class="num">0</span>) <span class="kw">continue</span> <span class="com">// Solo números pares</span>
+    <span class="fn">println</span>(<span class="var">i</span>)
+    <span class="kw">if</span> (<span class="var">i</span> <span class="op">==</span> <span class="num">6</span>) <span class="kw">break</span> <span class="com">// Detiene el bucle en 6</span>
+}</pre>
+    </div>
+    
+    <div class="card">
+        <h2>7. Elvis Operator <span class="op">?:</span> (Null Safety)</h2>
+        <p>Una forma concisa de manejar valores nulos (`null`). Si la expresión de la izquierda (`usuario`) es nula, se usa el valor de la derecha (`"Invitado"`).</p>
+        <pre><span class="kw">val</span> <span class="var">usuario</span>: <span class="type">String</span><span class="op">?</span> <span class="op">=</span> <span class="kw">null</span>
+<span class="kw">val</span> <span class="var">nombre</span> <span class="op">=</span> <span class="var">usuario</span> <span class="op">?:</span> <span class="str">"Invitado"</span>
+<span class="fn">println</span>(<span class="var">nombre</span>)</pre>
+    </div>
+    
+    <div class="card">
+        <h2>8. Corrutinas (Control de Flujo Asíncrono)</h2>
+        <p>Aunque no son una sentencia de control tradicional, las corrutinas son la principal herramienta en Kotlin/Android para gestionar el flujo de operaciones asíncronas (como redes o bases de datos) de manera controlada con `delay` o `launch`.</p>
+        <pre><span class="type">GlobalScope</span>.<span class="fn">launch</span> {
+    <span class="fn">delay</span>(<span class="num">1000</span>) <span class="com">// Espera no bloqueante por 1 segundo</span>
+    <span class="fn">println</span>(<span class="str">"Tarea completada en segundo plano"</span>)
+}</pre>
+    </div>
+
+    <h2 style="margin-top: 40px; border-bottom: 2px dashed #ccc; padding-bottom: 5px;">🚀 Sentencias de Control Avanzadas en Kotlin</h2>
+
+<div class="card">
+    <h2>1. Operadores Lógicos y Relacionales</h2>
+    <p>Operadores que permiten crear condiciones complejas combinando expresiones booleanas.</p>
+    <ul>
+        <li><code class="op">==</code>, <code class="op">!=</code>, <code class="op">&gt;</code>, <code class="op">&lt;</code>, <code class="op">>=</code>, <code class="op"><=</code> (Relacionales)</li>
+        <li><code class="op">&amp;&amp;</code> (AND), <code class="op">||</code> (OR), <code class="op">!</code> (NOT) (Lógicos)</li>
+    </ul>
+    <pre><span class="kw">val</span> <span class="var">edad</span> <span class="op">=</span> <span class="num">20</span>
+<span class="kw">if</span> (<span class="var">edad</span> <span class="op">>=</span> <span class="num">18</span> <span class="op">&amp;&amp;</span> <span class="var">edad</span> <span class="op"><=</span> <span class="num">65</span>) {
+    <span class="fn">println</span>(<span class="str">"Edad válida para trabajar"</span>)
+}
+    </pre>
+</div>
+
+<div class="card">
+    <h2>2. Rango de Valores (Range)</h2>
+    <p>Utilizado para iterar o verificar si un valor se encuentra dentro de un conjunto de números, simplificando las condiciones de los bucles.</p>
+    <ul>
+        <li><code class="kw">in</code>, <code class="op">!in</code> (Operadores)</li>
+        <li><code class="num">1<span class="op">..</span>10</code> (Rango inclusivo)</li>
+        <li><code class="var">downTo</code>, <code class="var">step</code> (Para bucles)</li>
+    </ul>
+    <pre><span class="kw">for</span> (<span class="var">i</span> <span class="kw">in</span> <span class="num">10</span> <span class="var">downTo</span> <span class="num">1</span> <span class="var">step</span> <span class="num">2</span>) {
+    <span class="fn">println</span>(<span class="var">i</span>)
+}
+    </pre>
+</div>
+
+<div class="card">
+    <h2>3. Funciones de Colecciones (Colecciones Flow Control)</h2>
+    <p>Métodos de extensión que permiten iterar y transformar listas de forma declarativa, reemplazando bucles `for` explícitos.</p>
+    <ul>
+        <li><code class="fn">forEach</code>: Ejecuta una acción en cada elemento.</li>
+        <li><code class="fn">filter</code>: Crea una nueva lista con los elementos que cumplen una condición.</li>
+    </ul>
+    <pre><span class="kw">val</span> <span class="var">numeros</span> <span class="op">=</span> <span class="type">listOf</span>(<span class="num">1</span>,<span class="num">2</span>,<span class="num">3</span>,<span class="num">4</span>,<span class="num">5</span>)
+<span class="var">numeros</span>.<span class="fn">forEachIndexed</span> { <span class="var">index</span>, <span class="var">valor</span> <span class="op">-></span>
+    <span class="fn">println</span>(<span class="str">"Índice $<span class="op">{</span><span class="var">index</span><span class="op">}</span> = $<span class="op">{</span><span class="var">valor</span><span class="op">}</span>"</span>)
+}
+    </pre>
+</div>
+
+<div class="card">
+    <h2>4. Control de Funciones y Etiquetas (`break@label`)</h2>
+    <p>Permite modificar el flujo de bucles anidados o expresiones lambda usando etiquetas (`@label`) para especificar exactamente qué bloque debe ser controlado por `break` o `continue`.</p>
+    <ul>
+        <li><code class="kw">return</code>, <code class="kw">break@label</code>, <code class="kw">continue@label</code></li>
+    </ul>
+    <pre><span class="var">loop</span><span class="op">@</span> <span class="kw">for</span> (<span class="var">i</span> <span class="kw">in</span> <span class="num">1</span><span class="op">..</span><span class="num">5</span>) {
+    <span class="kw">for</span> (<span class="var">j</span> <span class="kw">in</span> <span class="num">1</span><span class="op">..</span><span class="num">5</span>) {
+        <span class="kw">if</span> (<span class="var">j</span> <span class="op">==</span> <span class="num">3</span>) <span class="kw">break</span><span class="op">@</span><span class="var">loop</span> <span class="com">// Rompe el bucle externo (loop)</span>
+        <span class="fn">println</span>(<span class="str">"i=$<span class="op">{</span><span class="var">i</span><span class="op">}</span> j=$<span class="op">{</span><span class="var">j</span><span class="op">}</span>"</span>)
+    }
+}
+    </pre>
+</div>
+
+<div class="card">
+    <h2>5. Manejo de Errores (TRY/CATCH como Expresión)</h2>
+    <p>En Kotlin, `try/catch` puede ser utilizado como una expresión, devolviendo un valor. Esto hace el manejo de errores más funcional.</p>
+    <pre><span class="kw">try</span> {
+    <span class="kw">val</span> <span class="var">resultado</span> <span class="op">=</span> <span class="num">10</span> <span class="op">/</span> <span class="num">0</span>
+} <span class="kw">catch</span> (<span class="var">e</span>: <span class="type">Exception</span>) {
+    <span class="fn">println</span>(<span class="str">"Error: $<span class="op">{</span><span class="var">e</span>.<span class="var">message</span><span class="op">}</span>"</span>)
+} <span class="kw">finally</span> {
+    <span class="fn">println</span>(<span class="str">"Finalizado"</span>)
+}
+    </pre>
+</div>
+
+<div class="card">
+    <h2>6. Operadores de Null Safety</h2>
+    <p>Operadores cruciales para controlar el flujo de la aplicación cuando se trabaja con variables que pueden ser nulas (Null Safety).</p>
+    <ul>
+        <li><code class="op">?.</code> → Llamada segura (ejecuta solo si no es null)</li>
+        <li><code class="op">!!</code> → Operador de aserción (lanza excepción si es null)</li>
+        <li><code class="op">?:</code> → Operador Elvis (proporciona un valor por defecto si es null)</li>
+    </ul>
+    <pre><span class="kw">val</span> <span class="var">nombre</span>: <span class="type">String</span><span class="op">?</span> <span class="op">=</span> <span class="kw">null</span>
+<span class="fn">println</span>(<span class="var">nombre</span> <span class="op">?:</span> <span class="str">"No existe nombre"</span>) <span class="com">// Usa Elvis para manejar el null</span>
+    </pre>
+</div>
+
+<div class="card">
+    <h2>7. Lambdas de Flujo (Scope Functions)</h2>
+    <p>Funciones de orden superior que cambian el "ámbito" o "contexto" de un objeto, permitiendo ejecutar un bloque de código contra él (`let`, `run`, `apply`, etc.).</p>
+    <ul>
+        <li><code class="var">apply</code>: Configura un objeto (devuelve el objeto).</li>
+        <li><code class="var">run</code>: Ejecuta un bloque de código (devuelve el resultado del bloque).</li>
+    </ul>
+    <pre><span class="kw">val</span> <span class="var">persona</span> <span class="op">=</span> <span class="type">Persona</span>().<span class="fn">apply</span> {
+    <span class="var">nombre</span> <span class="op">=</span> <span class="str">"Fabricio"</span>
+    <span class="var">edad</span> <span class="op">=</span> <span class="num">22</span>
+}
+    </pre>
+</div>
+
+<div class="card">
+    <h2>8. Control Asíncrono - Corrutinas</h2>
+    <p>La solución de Kotlin para manejar el flujo de tareas concurrentes y asíncronas de manera controlada y legible, evitando "callback hell".</p>
+    <ul>
+        <li><code class="fn">launch</code>, <code class="fn">async</code>, <code class="fn">await</code>, <code class="fn">delay</code>, <code class="fn">withContext</code></li>
+    </ul>
+    <pre><span class="type">CoroutineScope</span>(<span class="type">Dispatchers</span>.<span class="type">IO</span>).<span class="fn">launch</span> {
+    <span class="fn">delay</span>(<span class="num">1000</span>)
+    <span class="kw">val</span> <span class="var">data</span> <span class="op">=</span> <span class="fn">async</span> { <span class="fn">obtenerDatos</span>() }.<span class="fn">await</span>()
+    <span class="fn">withContext</span>(<span class="type">Dispatchers</span>.<span class="type">Main</span>) {
+        <span class="fn">println</span>(<span class="str">"Datos: $<span class="op">{</span><span class="var">data</span><span class="op">}</span>"</span>)
+    }
+}
+    </pre>
+</div>
+
+<div class="card">
+    <h2>🛠️ Componentes Fundamentales de Jetpack Compose</h2>
+    <p>Para el aprendizaje y la realización de la mayoría de las aplicaciones en Android con Compose, estos tres tipos de archivos representan la base de la interfaz de usuario y la lógica de flujo. **Son los componentes más usados** y esenciales para construir cualquier pantalla:</p>
+    <ul>
+        <li>**`MainActivity.kt`**: Contiene la lógica principal (`setContent`) y la Composable raíz (la "pantalla"). Aquí se gestiona el estado y el flujo central.</li>
+        <li>**Componentes de Texto (`TextUi`)**: Encargados de la presentación de texto y títulos con estilos definidos.</li>
+        <li>**Componentes de Input (`TextFieldUi`)**: Permiten la interacción del usuario para ingresar datos.</li>
+        <li>**Componentes de Diálogo (`AlertDialogUi`)**: Controlan la interacción modal (mensajes de éxito, error, confirmación).</li>
+    </ul>
+    <div class="card">
+    <h2>🧩 Componentes de UI Modulares</h2>
+    <p>Estos archivos demuestran cómo se pueden encapsular elementos comunes de la interfaz de usuario para ser reutilizados en diferentes pantallas (Composables) de la aplicación, manteniendo el código limpio y organizado.</p>
+
+    <hr style="border-color: #eee;">
+
+    <div style="margin-top: 20px;">
+        <h4 style="background: #1a5276; color: white; padding: 8px 15px; border-radius: 8px 8px 0 0; margin-bottom: 0;">📁 TextUI.kt (Componente de Texto)</h4>
+        <pre style="margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
+<span class="kw">package</span> <span class="var">mi</span>.<span class="var">aplicacion</span>.<span class="var">dialogue</span>.<span class="var">ui</span>.<span class="var">componentes</span>
+
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">foundation</span>.<span class="var">background</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">foundation</span>.<span class="var">layout</span>.<span class="fn">fillMaxWidth</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">material3</span>.<span class="type">Text</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">runtime</span>.<span class="type">Composable</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="type">Modifier</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">graphics</span>.<span class="type">Color</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">text</span>.<span class="var">font</span>.<span class="type">FontFamily</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">text</span>.<span class="var">font</span>.<span class="type">FontWeight</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">text</span>.<span class="var">style</span>.<span class="type">TextAlign</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">unit</span>.<span class="var">sp</span>
+
+<span class="op">@</span><span class="type">Composable</span>
+<span class="kw">fun</span> <span class="fn">TextUi</span>(<span class="var">text</span>: <span class="type">String</span>){
+    <span class="type">Text</span>(
+        <span class="var">text</span> <span class="op">=</span> <span class="var">text</span>,
+        <span class="var">color</span> <span class="op">=</span> <span class="type">Color</span>.<span class="type">Green</span>,
+        <span class="var">fontSize</span> <span class="op">=</span> <span class="num">20</span>.<span class="var">sp</span>,
+        <span class="var">fontFamily</span> <span class="op">=</span> <span class="type">FontFamily</span>.<span class="type">Monospace</span>,
+        <span class="var">fontWeight</span> <span class="op">=</span> <span class="type">FontWeight</span>.<span class="type">Bold</span>,
+        <span class="var">textAlign</span> <span class="op">=</span> <span class="type">TextAlign</span>.<span class="type">Center</span>,
+        <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().
+        <span class="fn">background</span>(<span class="type">Color</span>.<span class="type">Blue</span>)
+    )
+}
+        </pre>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <h4 style="background: #1a5276; color: white; padding: 8px 15px; border-radius: 8px 8px 0 0; margin-bottom: 0;">📁 TextFieldUi.kt (Componente de Campo de Texto)</h4>
+        <pre style="margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
+<span class="kw">package</span> <span class="var">mi</span>.<span class="var">aplicacion</span>.<span class="var">dialogue</span>.<span class="var">ui</span>.<span class="var">componentes</span>
+
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">foundation</span>.<span class="var">layout</span>.<span class="fn">fillMaxWidth</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">foundation</span>.<span class="var">layout</span>.<span class="fn">padding</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">material3</span>.<span class="type">Text</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">material3</span>.<span class="type">TextField</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">runtime</span>.<span class="type">Composable</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="type">Modifier</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">unit</span>.<span class="var">dp</span>
+
+<span class="op">@</span><span class="type">Composable</span>
+<span class="kw">fun</span> <span class="fn">CreateTextField</span>(<span class="var">valor</span>: <span class="type">String</span>,
+                    <span class="var">label</span>: <span class="type">String</span>,
+                    <span class="var">onValue</span>: (<span class="type">String</span>)<span class="op">-></span> <span class="type">Unit</span>){
+
+    <span class="type">TextField</span>(<span class="var">value</span> <span class="op">=</span> <span class="var">valor</span>,
+        <span class="var">onValueChange</span> <span class="op">=</span> <span class="var">onValue</span>,
+        <span class="var">label</span> <span class="op">=</span>{ <span class="type">Text</span>(<span class="var">text</span> <span class="op">=</span> <span class="var">label</span>)},
+        <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().<span class="fn">padding</span>(<span class="num">10</span>.<span class="var">dp</span>)
+    )
+}
+        </pre>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <h4 style="background: #1a5276; color: white; padding: 8px 15px; border-radius: 8px 8px 0 0; margin-bottom: 0;">📁 AlertDialogUi.kt (Componente de Diálogo)</h4>
+        <pre style="margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
+<span class="kw">package</span> <span class="var">mi</span>.<span class="var">aplicacion</span>.<span class="var">dialogue</span>.<span class="var">ui</span>.<span class="var">componentes</span>
+
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">material3</span>.<span class="type">AlertDialog</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">material3</span>.<span class="type">Text</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">material3</span>.<span class="type">TextButton</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">runtime</span>.<span class="type">Composable</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">text</span>.<span class="var">font</span>.<span class="type">FontFamily</span>
+
+<span class="op">@</span><span class="type">Composable</span>
+<span class="kw">fun</span> <span class="fn">AlertDialogUi</span>(
+    <span class="var">titulo</span>: <span class="type">String</span>,
+    <span class="var">mensaje</span>: <span class="type">String</span>,
+    <span class="var">dissmissButton</span>: () <span class="op">-></span> <span class="type">Unit</span>,
+    <span class="var">confirmButton</span>: () <span class="op">-></span> <span class="type">Unit</span>
+) {
+    <span class="type">AlertDialog</span>(
+        <span class="var">onDismissRequest</span> <span class="op">=</span> <span class="var">dissmissButton</span>,
+        <span class="var">title</span> <span class="op">=</span> {
+            <span class="type">Text</span>(
+                <span class="var">text</span> <span class="op">=</span> <span class="var">titulo</span>,
+                <span class="var">fontFamily</span> <span class="op">=</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">text</span>.<span class="var">font</span>.<span class="type">FontFamily</span>.<span class="type">Monospace</span>,
+            )
+        },
+        <span class="var">text</span> <span class="op">=</span> {
+            <span class="type">Text</span>(<span class="var">text</span> <span class="op">=</span> <span class="var">mensaje</span>)
+        },
+        <span class="var">confirmButton</span> <span class="op">=</span> {
+            <span class="type">TextButton</span>(<span class="var">onClick</span> <span class="op">=</span> <span class="var">confirmButton</span>) {
+                <span class="type">Text</span>(<span class="str">"Continuar"</span>)
+            }
+        },
+        <span class="var">dismissButton</span> <span class="op">=</span> {
+            <span class="type">TextButton</span>(<span class="var">onClick</span> <span class="op">=</span> <span class="var">dissmissButton</span>) {
+                <span class="type">Text</span>(<span class="str">"Regresar"</span>)
+            }
+        }
+    )
+}
+        </pre>
+    </div>
+</div>
+    <hr style="border-color: #ddd;">
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <h2>🎯 Ejercicio 1: Clasificación de Número Par o Impar</h2>
+    <p><strong>Descripción:</strong> Este ejercicio pide dos números al usuario y clasifica cada uno como Par o Impar. Es un ejemplo directo de cómo usar el operador módulo (<code class="op">%</code>) y la sentencia <code class="kw">if</code>/<code class="kw">else</code> como una **expresión** para asignar un valor a una variable.</p>
+
+    <h3>Sentencias de Control Utilizadas:</h3>
+    <ul>
+        <li><code class="kw">val</code> / <code class="kw">var</code>: Variables de estado y locales.</li>
+        <li><code class="kw">if</code> / <code class="kw">else</code> (Expresión): Se usa para determinar la clasificación y asignar el resultado (`class = if (condición) "Par" else "Impar"`).</li>
+        <li><code class="kw">if</code> (Condicional): Controla la visibilidad del `AlertDialog`.</li>
+        <li><code class="op">-></code> (Función Lambda): Controla el flujo de eventos (`onClick`, `onValueChange`).</li>
+    </ul>
+
+    <hr style="border-color: #eee;">
+
+    <div style="margin-top: 20px;">
+        <h4 style="background: #1a5276; color: white; padding: 8px 15px; border-radius: 8px 8px 0 0; margin-bottom: 0;">📁 MainActivity.kt (Clasificador Par/Impar)</h4>
+        <pre style="margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
+<span class="kw">package</span> <span class="var">mi</span>.<span class="var">aplicacion</span>.<span class="var">alertdialog</span>
+
+<span class="kw">import</span> <span class="var">android</span>.<span class="var">os</span>.<span class="type">Bundle</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">activity</span>.<span class="type">ComponentActivity</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">activity</span>.<span class="var">compose</span>.<span class="fn">setContent</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">activity</span>.<span class="fn">enableEdgeToEdge</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">foundation</span>.<span class="var">layout</span>.<span class="op">*</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">material3</span>.<span class="op">*</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">runtime</span>.<span class="op">*</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">runtime</span>.<span class="var">saveable</span>.<span class="fn">rememberSaveable</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="type">Alignment</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="type">Modifier</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">tooling</span>.<span class="var">preview</span>.<span class="type">Preview</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">unit</span>.<span class="var">dp</span>
+
+<span class="kw">class</span> <span class="type">MainActivity</span> : <span class="type">ComponentActivity</span>() {
+    <span class="kw">override</span> <span class="kw">fun</span> <span class="fn">onCreate</span>(<span class="var">savedInstanceState</span>: <span class="type">Bundle</span><span class="op">?</span>) {
+        <span class="kw">super</span>.<span class="fn">onCreate</span>(<span class="var">savedInstanceState</span>)
+        <span class="fn">enableEdgeToEdge</span>()
+        <span class="fn">setContent</span> {
+            <span class="fn">NumberClassifierApp</span>()
+        }
+    }
+}
+
+<span class="op">@</span><span class="type">Preview</span>(<span class="var">showBackground</span> <span class="op">=</span> <span class="kw">true</span>)
+<span class="op">@</span><span class="type">Composable</span>
+<span class="kw">fun</span> <span class="fn">NumberClassifierApp</span>() {
+
+    <span class="com">// --- ESTADOS ---</span>
+    <span class="kw">var</span> <span class="var">numText1</span> <span class="kw">by</span> <span class="fn">rememberSaveable</span> { <span class="fn">mutableStateOf</span>(<span class="str">""</span>) }
+    <span class="kw">var</span> <span class="var">numText2</span> <span class="kw">by</span> <span class="fn">rememberSaveable</span> { <span class="fn">mutableStateOf</span>(<span class="str">""</span>) }
+    <span class="kw">var</span> <span class="var">isVerified</span> <span class="kw">by</span> <span class="fn">rememberSaveable</span> { <span class="fn">mutableStateOf</span>(<span class="kw">false</span>) }
+
+    <span class="type">Column</span>(
+        <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">fillMaxSize</span>().<span class="fn">padding</span>(<span class="num">24</span>.<span class="var">dp</span>),
+        <span class="var">horizontalAlignment</span> <span class="op">=</span> <span class="type">Alignment</span>.<span class="type">CenterHorizontally</span>
+    ) {
+
+        <span class="type">Text</span>(
+            <span class="var">text</span> <span class="op">=</span> <span class="str">"🔢 Clasificador Par/Impar"</span>,
+            <span class="var">style</span> <span class="op">=</span> <span class="type">MaterialTheme</span>.<span class="var">typography</span>.<span class="var">headlineMedium</span>,
+            <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">padding</span>(<span class="var">bottom</span> <span class="op">=</span> <span class="num">30</span>.<span class="var">dp</span>)
+        )
+
+        <span class="com">// CAMPO 1 </span>
+        <span class="type">OutlinedTextField</span>(
+            <span class="var">value</span> <span class="op">=</span> <span class="var">numText1</span>,
+            <span class="var">onValueChange</span> <span class="op">=</span> { <span class="var">numText1</span> <span class="op">=</span> <span class="kw">it</span> },
+            <span class="var">label</span> <span class="op">=</span> { <span class="type">Text</span>(<span class="str">"Número 1"</span>) },
+            <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().<span class="fn">padding</span>(<span class="var">vertical</span> <span class="op">=</span> <span class="num">8</span>.<span class="var">dp</span>)
+        )
+
+        <span class="com">// CAMPO 2</span>
+        <span class="type">OutlinedTextField</span>(
+            <span class="var">value</span> <span class="op">=</span> <span class="var">numText2</span>,
+            <span class="var">onValueChange</span> <span class="op">=</span> { <span class="var">numText2</span> <span class="op">=</span> <span class="kw">it</span> },
+            <span class="var">label</span> <span class="op">=</span> { <span class="type">Text</span>(<span class="str">"Número 2"</span>) },
+            <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>().<span class="fn">padding</span>(<span class="var">vertical</span> <span class="op">=</span> <span class="num">8</span>.<span class="var">dp</span>)
+        )
+
+        <span class="type">Spacer</span>(<span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">height</span>(<span class="num">20</span>.<span class="var">dp</span>))
+
+        <span class="com">// --- BOTÓN VERIFICAR ---</span>
+        <span class="type">Button</span>(
+            <span class="var">onClick</span> <span class="op">=</span> {
+                <span class="com">// Cambia el estado para disparar el AlertDialog</span>
+                <span class="var">isVerified</span> <span class="op">=</span> <span class="kw">true</span>
+            },
+            <span class="com">// Deshabilita si los campos están vacíos (Sentencia IF implícita en 'enabled')</span>
+            <span class="var">enabled</span> <span class="op">=</span> <span class="var">numText1</span>.<span class="fn">isNotEmpty</span>() <span class="op">&&</span> <span class="var">numText2</span>.<span class="fn">isNotEmpty</span>(),
+            <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>()
+        ) {
+            <span class="type">Text</span>(<span class="var">text</span> <span class="op">=</span> <span class="str">"Verificar"</span>)
+        }
+
+        <span class="com">// --- ALERT DIALOG (Controlado por IF) ---</span>
+        <span class="kw">if</span> (<span class="var">isVerified</span>) {
+            <span class="kw">val</span> <span class="var">num1</span> <span class="op">=</span> <span class="var">numText1</span>.<span class="fn">toIntOrNull</span>() <span class="op">?:</span> <span class="num">0</span>
+            <span class="kw">val</span> <span class="var">num2</span> <span class="op">=</span> <span class="var">numText2</span>.<span class="fn">toIntOrNull</span>() <span class="op">?:</span> <span class="num">0</span>
+
+            <span class="type">AlertDialog</span>(
+                <span class="var">onDismissRequest</span> <span class="op">=</span> { <span class="var">isVerified</span> <span class="op">=</span> <span class="kw">false</span> },
+                <span class="var">title</span> <span class="op">=</span> { <span class="type">Text</span>(<span class="str">"Resultado"</span>) },
+                <span class="var">text</span> <span class="op">=</span> {
+                    <span class="kw">val</span> <span class="var">result</span> <span class="op">=</span> <span class="fn">buildString</span> {
+                        <span class="com">// Lógica IF/ELSE como expresión para la clasificación:</span>
+                        <span class="fn">append</span>(<span class="str">"Número 1 ($<span class="op">{</span><span class="var">num1</span><span class="op">}</span>): "</span>)
+                        <span class="fn">append</span>(<span class="kw">if</span> (<span class="var">num1</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>) <span class="str">"Par"</span> <span class="kw">else</span> <span class="str">"Impar"</span>)
+                        <span class="fn">append</span>(<span class="str">"\n"</span>)
+                        <span class="fn">append</span>(<span class="str">"Número 2 ($<span class="op">{</span><span class="var">num2</span><span class="op">}</span>): "</span>)
+                        <span class="fn">append</span>(<span class="kw">if</span> (<span class="var">num2</span> <span class="op">%</span> <span class="num">2</span> <span class="op">==</span> <span class="num">0</span>) <span class="str">"Par"</span> <span class="kw">else</span> <span class="str">"Impar"</span>)
+                    }
+                    <span class="type">Text</span>(<span class="var">result</span>)
+                },
+                <span class="var">confirmButton</span> <span class="op">=</span> {
+                    <span class="type">Button</span>(<span class="var">onClick</span> <span class="op">=</span> { <span class="var">isVerified</span> <span class="op">=</span> <span class="kw">false</span> }) {
+                        <span class="type">Text</span>(<span class="str">"Aceptar"</span>)
+                    }
+                }
+            )
+        }
+    }
+}
+        </pre>
+    </div>
+</div>
+
+<div class="card" style="margin-top: 20px;">
+    <h2>🎯 Ejercicio 2: Simulación de Inicio de Sesión (Simplificado)</h2>
+    <p><strong>Descripción:</strong> Esta versión simplificada simula un inicio de sesión que muestra el diálogo de éxito **inmediatamente** al presionar el botón, sin realizar validaciones de contraseña. El enfoque está en cómo la sentencia <code class="kw">var</code> de estado controla la visibilidad de los elementos del UI.</p>
+
+    <h3>Sentencias de Control Utilizadas:</h3>
+    <ul>
+        <li><code class="kw">var</code>: Variables de estado (`password`, `showDialog`).</li>
+        <li><code class="kw">if</code> (Condicional): Controla la visibilidad del `AlertDialog`.</li>
+        <li><code class="op">-></code> (Función Lambda): Controla el flujo de eventos (`onClick`).</li>
+    </ul>
+
+    <hr style="border-color: #eee;">
+
+    <div style="margin-top: 20px;">
+        <h4 style="background: #1a5276; color: white; padding: 8px 15px; border-radius: 8px 8px 0 0; margin-bottom: 0;">📁 MainActivity.kt (Login Simplificado)</h4>
+        <pre style="margin-top: 0; border-top-left-radius: 0; border-top-right-radius: 0;">
+<span class="kw">package</span> <span class="var">mi</span>.<span class="var">aplicacion</span>.<span class="var">dialogue</span>
+
+<span class="kw">import</span> <span class="var">android</span>.<span class="var">os</span>.<span class="type">Bundle</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">activity</span>.<span class="type">ComponentActivity</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">activity</span>.<span class="var">compose</span>.<span class="fn">setContent</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">activity</span>.<span class="fn">enableEdgeToEdge</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">foundation</span>.<span class="var">layout</span>.<span class="op">*</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">material3</span>.<span class="op">*</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">runtime</span>.<span class="op">*</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">runtime</span>.<span class="var">saveable</span>.<span class="fn">rememberSaveable</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="type">Alignment</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="type">Modifier</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">text</span>.<span class="var">input</span>.<span class="type">PasswordVisualTransformation</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">tooling</span>.<span class="var">preview</span>.<span class="type">Preview</span>
+<span class="kw">import</span> <span class="var">androidx</span>.<span class="var">compose</span>.<span class="var">ui</span>.<span class="var">unit</span>.<span class="var">dp</span>
+
+<span class="kw">class</span> <span class="type">MainActivity</span> : <span class="type">ComponentActivity</span>() {
+    <span class="kw">override</span> <span class="kw">fun</span> <span class="fn">onCreate</span>(<span class="var">savedInstanceState</span>: <span class="type">Bundle</span><span class="op">?</span>) {
+        <span class="kw">super</span>.<span class="fn">onCreate</span>(<span class="var">savedInstanceState</span>)
+        <span class="fn">enableEdgeToEdge</span>()
+        <span class="fn">setContent</span> {
+            <span class="fn">SimpleLoginScreen</span>()
+        }
+    }
+}
+
+<span class="op">@</span><span class="type">Preview</span>
+<span class="op">@</span><span class="type">Composable</span>
+<span class="kw">fun</span> <span class="fn">SimpleLoginScreen</span>() {
+
+    <span class="com">// --- ESTADOS ---</span>
+    <span class="kw">var</span> <span class="var">password</span> <span class="kw">by</span> <span class="fn">rememberSaveable</span> { <span class="fn">mutableStateOf</span>(<span class="str">""</span>) }
+    <span class="kw">var</span> <span class="var">showDialog</span> <span class="kw">by</span> <span class="fn">rememberSaveable</span> { <span class="fn">mutableStateOf</span>(<span class="kw">false</span>) }
+
+    <span class="type">Column</span>(
+        <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>
+            .<span class="fn">fillMaxSize</span>()
+            .<span class="fn">padding</span>(<span class="num">24</span>.<span class="var">dp</span>),
+        <span class="var">horizontalAlignment</span> <span class="op">=</span> <span class="type">Alignment</span>.<span class="type">CenterHorizontally</span>
+    ) {
+
+        <span class="type">Text</span>(
+            <span class="var">text</span> <span class="op">=</span> <span class="str">"🔐 Ingreso al sistema"</span>,
+            <span class="var">style</span> <span class="op">=</span> <span class="type">MaterialTheme</span>.<span class="var">typography</span>.<span class="var">headlineMedium</span>,
+            <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">padding</span>(<span class="var">bottom</span> <span class="op">=</span> <span class="num">30</span>.<span class="var">dp</span>)
+        )
+
+        <span class="com">// --- TEXT FIELD DE CONTRASEÑA ---</span>
+        <span class="type">OutlinedTextField</span>(
+            <span class="var">value</span> <span class="op">=</span> <span class="var">password</span>,
+            <span class="var">onValueChange</span> <span class="op">=</span> { <span class="var">password</span> <span class="op">=</span> <span class="kw">it</span> },
+            <span class="var">label</span> <span class="op">=</span> { <span class="type">Text</span>(<span class="str">"Contraseña"</span>) },
+            <span class="var">visualTransformation</span> <span class="op">=</span> <span class="type">PasswordVisualTransformation</span>(),
+            <span class="var">singleLine</span> <span class="op">=</span> <span class="kw">true</span>,
+            <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>()
+        )
+
+        <span class="type">Spacer</span>(<span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">height</span>(<span class="num">20</span>.<span class="var">dp</span>))
+
+        <span class="com">// --- BOTÓN VERIFICAR ---</span>
+        <span class="type">Button</span>(
+            <span class="com">// Lógica simplificada: cambia el estado showDialog a true (Sentencia Lambda)</span>
+            <span class="var">onClick</span> <span class="op">=</span> { <span class="var">showDialog</span> <span class="op">=</span> <span class="kw">true</span> },
+            <span class="var">modifier</span> <span class="op">=</span> <span class="type">Modifier</span>.<span class="fn">fillMaxWidth</span>()
+        ) {
+            <span class="type">Text</span>(<span class="var">text</span> <span class="op">=</span> <span class="str">"Verificar "</span>)
+        }
+
+        <span class="com">// --- ALERT DIALOG (Controlado por Estado) ---</span>
+        <span class="com">// Sentencia IF: Solo se ejecuta si showDialog es true</span>
+        <span class="kw">if</span> (<span class="var">showDialog</span>) {
+            <span class="type">AlertDialog</span>(
+                <span class="var">onDismissRequest</span> <span class="op">=</span> {
+                    <span class="var">showDialog</span> <span class="op">=</span> <span class="kw">false</span> <span class="com">// Ocultar al tocar fuera</span>
+                },
+                <span class="var">title</span> <span class="op">=</span> { <span class="type">Text</span>(<span class="str">"Mensaje del Sistema"</span>) },
+                <span class="var">text</span> <span class="op">=</span> { <span class="type">Text</span>(<span class="str">"🎉 Ingreso Exitoso"</span>) },
+                <span class="var">confirmButton</span> <span class="op">=</span> {
+                    <span class="type">Button</span>(<span class="var">onClick</span> <span class="op">=</span> { <span class="var">showDialog</span> <span class="op">=</span> <span class="kw">false</span> }) {
+                        <span class="type">Text</span>(<span class="str">"Aceptar"</span>)
+                    }
+                }
+            )
+        }
+    }
+}
+        </pre>
+    </div>
+</div>
+
+<h1>Ejercicios prácticos y Readme (Dar click en los enlaces)</h1>
+<a href="https://drive.google.com/file/d/15FVqpBPP9jeUe7Jluji94yOcqyPRi9ci/view?usp=sharing">Video de los 2 ejercicios prácticos</a><br>
+<a href="">Enlace de github a Readme</a>
+</body>
+</html>
