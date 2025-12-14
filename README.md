@@ -35,6 +35,9 @@ if (edad >= 18) {
 } else {
     println("Edad inválida")
 }
+
+### 2. WHEN (Alternativa a Switch/Múltiples Casos)
+Permite evaluar una expresión contra múltiples ramas. Soporta rangos y tipos, siendo más potente que el switch de Java.
 when(opcion) {
     1 -> println("Inicio")
     2 -> println("Configuración")
