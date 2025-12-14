@@ -35,3 +35,14 @@ if (edad >= 18) {
 } else {
     println("Edad inválida")
 }
+when(opcion) {
+    1 -> println("Inicio")
+    2 -> println("Configuración")
+    in 3..5 -> println("Menú Secundario") // Uso de Rangos
+    else -> println("Salir")
+}
+
+val listaNombres = listOf("Ana", "Beto", "Carlos")
+for (nombre in listaNombres) {
+    println("Hola ${nombre}")
+}
